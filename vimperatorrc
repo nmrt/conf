@@ -1,0 +1,3 @@
+map <C-j> <Return>
+imap <C-j> <Return>
+cmap <C-j> <Return>

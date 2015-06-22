@@ -1,0 +1,9 @@
+#line-edit
+^I	forw-complete
+\e^I	back-complete
+	word-backspace
+	home
+	home
+	end
+	up
+	down

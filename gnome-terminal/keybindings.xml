@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="help" mtime="1367312335" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+	<entry name="move_tab_right" mtime="1334527825" type="string">
+		<stringvalue>&lt;Primary&gt;&lt;Alt&gt;n</stringvalue>
+	</entry>
+	<entry name="move_tab_left" mtime="1334527822" type="string">
+		<stringvalue>&lt;Primary&gt;&lt;Alt&gt;p</stringvalue>
+	</entry>
+	<entry name="next_tab" mtime="1334233720" type="string">
+		<stringvalue>&lt;Primary&gt;&lt;Shift&gt;n</stringvalue>
+	</entry>
+	<entry name="new_window" mtime="1334233641" type="string">
+		<stringvalue>&lt;Primary&gt;&lt;Shift&gt;&lt;Alt&gt;n</stringvalue>
+	</entry>
+	<entry name="prev_tab" mtime="1334233375" type="string">
+		<stringvalue>&lt;Primary&gt;&lt;Shift&gt;p</stringvalue>
+	</entry>
+</gconf>

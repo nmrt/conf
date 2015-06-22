@@ -1,0 +1,43 @@
+$include /etc/inputrc
+
+set editing-mode vi
+set bell-style visible
+set completion-ignore-case on
+set skip-completed-text on
+set history-size 1000
+#set convert-meta off
+
+$if mode=vi
+
+## ctrl + [left|right] arrow
+#"\e[1;5D":	backward-word
+#"\e[1;5C":	forward-word
+
+# up & down arrows
+  "\e[A":	history-search-backward
+  "\e[B":	history-search-forward
+
+## page up & page down
+#"\e[5~":	previous-history
+#"\e[6~":	next-history
+## alt + page [up|down]
+#"\e[5;3~":	beginning-of-history
+#"\e[6;3~":	end-of-history
+
+  "\e^":	history-expand-line
+  "\C-p":	previous-history
+  "\C-n":	next-history
+
+  "\C-a":	beginning-of-line
+  "\C-b":	beginning-of-line
+  "\C-e":	end-of-line
+  "\C-k":	kill-line
+
+# TODO adding "\M-\C-j" at the end will interrupt the completion
+  "\e\C-i":	"\M-\C-j\e\C-i"
+  "\M-\C-j":	emacs-editing-mode
+  "\e\C-j":	emacs-editing-mode
+  set keymap emacs
+  "\M-\C-j":	vi-editing-mode
+
+$endif
