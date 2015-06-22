@@ -13,7 +13,7 @@ if !has('gui_running')
   set t_Co=256
 endif
 let g:molokai_original = 1
-colorscheme molokai
+"colorscheme molokai
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the
 " following enables syntax highlighting by default.
@@ -224,7 +224,6 @@ command ClearEmptyLines %s/\v^\s+$//
 command SS SaveSession
 command OS OpenSession
 
-call pathogen#infect()
 set textwidth=78
 set foldmethod=indent
 set modeline
