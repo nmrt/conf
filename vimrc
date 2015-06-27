@@ -2,6 +2,24 @@ if exists("g:loaded_user_vimrc")
   finish 
 endif
 
+" Vundle stuff
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+
+"Plugin 'wookiehangover/jshint.vim'
+"Plugin 'walm/jshint.vim'
+Plugin 'tomasr/molokai'
+call vundle#end()
+
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
@@ -13,7 +31,7 @@ if !has('gui_running')
   set t_Co=256
 endif
 let g:molokai_original = 1
-"colorscheme molokai
+colorscheme molokai
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the
 " following enables syntax highlighting by default.
@@ -160,6 +178,13 @@ nmap <silent> <F5> :NERDTreeFind<CR>
 vmap <silent> <F5> <Esc><F5>
 imap <silent> <F5> <Esc><F5>
 
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeShowBookmarks = 1
+let NERDTreeMapHelp = '<F1>'
+let NERDTreeWinSize = 50
+let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
+
 " Tagbar
 nmap <silent> <F9> :TagbarToggle<CR>
 vmap <silent> <F9> <Esc><F9>
@@ -218,6 +243,7 @@ inoremap <C-U> <C-G>u<C-U>
 
 " <C-j> and carriage return are the same
 map <C-j> <CR>
+imap <C-j> <CR>
 
 command SearchComm /\(^\s*\)\@<=\v(\/\/|#|")\V\[ !]\@!
 command ClearEmptyLines %s/\v^\s+$//
@@ -232,13 +258,6 @@ set formatoptions+=n " Numbered lists.
 set formatoptions+=l " Long lines are not broken in insert mode.
 set formatoptions+=1 " Don't break a line after a one-letter word.
 set formatoptions+=j " Remove a comment leader when joining lines.
-
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeShowBookmarks = 1
-let NERDTreeMapHelp = '<F1>'
-let NERDTreeWinSize = 50
-let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
 
 " Disablement of non-undoable :only shortcut
 nnoremap <C-W>o <Esc>
@@ -279,3 +298,26 @@ let g:loaded_user_vimrc = 1
 
 " MAN 
 runtime! ftplugin/man.vim
+
+" For jelera/vim-javascript-syntax plugin
+au FileType javascript call JavaScriptFold()
+
+" Indent Guides
+"let g:indent_guides_guide_size = 1
+
+" Disable matchparen plugin, so that it doesn't throw errors
+let loaded_matchparen = 1
+
+" delimitMate
+let delimitMate_expand_cr = 1
+
+" syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_jump = 3
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
