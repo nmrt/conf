@@ -321,3 +321,7 @@ let g:syntastic_auto_jump = 3
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+if filereadable(expand("~/.vim_extensions"))
+  source ~/.vim_extensions
+endif
