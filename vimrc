@@ -2,6 +2,64 @@ if exists("g:loaded_user_vimrc")
   finish 
 endif
 
+" Vundle stuff
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'embear/vim-localvimrc'
+
+" Syntax & style
+Plugin 'jelera/vim-javascript-syntax'
+"Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'scrooloose/syntastic'
+"Plugin 'wookiehangover/jshint.vim'
+"Plugin 'walm/jshint.vim'
+"Plugin 'maksimr/vim-jsbeautify'
+"Plugin 'einars/js-beautify'
+
+" Navigation
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-unimpaired'
+"Plugin 'mileszs/ack.vim'
+Plugin 'FuzzyFinder'
+  Plugin 'L9' " required by FuzzyFinder
+Plugin 'easymotion/vim-easymotion'
+"Plugin 'wincent/command-t'
+Plugin 'PeterRincker/vim-argumentative'
+
+" Editing & completion
+Plugin 'tpope/vim-surround'
+"Plugin 'Raimondi/delimitMate'
+Plugin 'tomtom/tcomment_vim'
+"Plugin 'scrooloose/nerdcommenter'
+if !filereadable(expand('~/.at_google'))
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'marijnh/tern_for_vim'
+endif
+Plugin 'tpope/vim-repeat'
+Plugin 'Olical/vim-enmasse'
+
+" Snippets
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" SCM
+"Plugin 'git://repo.or.cz/vcscommand'
+Plugin 'tpope/vim-fugitive' " Git
+Plugin 'mhinz/vim-signify'
+
+" Themes
+Plugin 'tomasr/molokai'
+Plugin 'bling/vim-airline'
+call vundle#end()
+
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
@@ -13,7 +71,7 @@ if !has('gui_running')
   set t_Co=256
 endif
 let g:molokai_original = 1
-"colorscheme molokai
+colorscheme molokai
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the
 " following enables syntax highlighting by default.
@@ -28,12 +86,6 @@ if has("autocmd")
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
-endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
 endif
 
 " Convenient command to see the difference between the current buffer and the
@@ -97,7 +149,7 @@ set viminfo+=r/tmp
 
 " Spelling & 80+ columns highlighting
 "set nospell
-set spell
+"set spell
 autocmd InsertEnter * 3match Error /\%>80v/
 autocmd InsertLeave * 3match none
 "autocmd InsertEnter * set spell
@@ -146,6 +198,56 @@ exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
 command W w
 command Q q
 
+" Leader
+let mapleader = ","
+
+" Previous, next tab
+nmap <C-n> gt
+nmap <C-p> gT
+
+" Removal of the last digit of [count]
+map  <Del>
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" <C-j> and carriage return are the same
+map <C-j> <CR>
+lmap <C-j> <CR>
+omap <C-j> <CR>
+
+command SearchComm /\(^\s*\)\@<=\v(\/\/|#|")\V\[ !]\@!
+command ClearEmptyLines %s/\v^\s+$//
+command SS SaveSession
+command OS OpenSession
+
+set textwidth=78
+set foldmethod=indent
+set modeline
+"set formatoptions+=a " Automatic formatting of paragraphs.
+set formatoptions+=n " Numbered lists.
+set formatoptions+=l " Long lines are not broken in insert mode.
+set formatoptions+=1 " Don't break a line after a one-letter word.
+set formatoptions+=j " Remove a comment leader when joining lines.
+
+" Disablement of non-undoable :only shortcut
+nnoremap <C-W>o <Esc>
+nnoremap <C-W><C-O> <Esc>
+
+" Copy file name
+nnoremap <silent> cp :let @+ = expand("%")<CR>
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" PLUGINS
+" TODO Clean up this stuff, ideally distribute plugins' configuration into
+" separate files and infer their repositories from local path.
+" https://github.com/Olical/dotfiles
+
 " Window Manager
 "let g:winManagerWindowLayout = 'FileExplorer,TagList'
 
@@ -159,6 +261,12 @@ let g:miniBufExplModSelTarget = 1
 nmap <silent> <F5> :NERDTreeFind<CR>
 vmap <silent> <F5> <Esc><F5>
 imap <silent> <F5> <Esc><F5>
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeShowBookmarks = 1
+let NERDTreeMapHelp = '<F1>'
+let NERDTreeWinSize = 50
+let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
 
 " Tagbar
 nmap <silent> <F9> :TagbarToggle<CR>
@@ -199,85 +307,113 @@ imap <silent> <F8> <Esc><F8>
 let php_htmlInStrings = 1
 autocmd FileType php let php_sync_method = -1
 
-" Snippets
-let g:snippets_dir = '~/.vim/snippets/,~/.vim/snippets/my/'
-
-" Previous, next tab
-nmap <C-n> gt
-nmap <C-p> gT
-
-" Removal of the last digit of [count]
-map  <Del>
-
-" Search for selected text
-vmap / y/<C-R>"<CR>
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" <C-j> and carriage return are the same
-map <C-j> <CR>
-
-command SearchComm /\(^\s*\)\@<=\v(\/\/|#|")\V\[ !]\@!
-command ClearEmptyLines %s/\v^\s+$//
-command SS SaveSession
-command OS OpenSession
-
-set textwidth=78
-set foldmethod=indent
-set modeline
-"set formatoptions+=a " Automatic formatting of paragraphs.
-set formatoptions+=n " Numbered lists.
-set formatoptions+=l " Long lines are not broken in insert mode.
-set formatoptions+=1 " Don't break a line after a one-letter word.
-set formatoptions+=j " Remove a comment leader when joining lines.
-
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeShowBookmarks = 1
-let NERDTreeMapHelp = '<F1>'
-let NERDTreeWinSize = 50
-let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
-
-" Disablement of non-undoable :only shortcut
-nnoremap <C-W>o <Esc>
-nnoremap <C-W><C-O> <Esc>
-
-" For vim-javascript
-let g:html_indent_inctags = "html,body,head,tbody"
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-
-nnoremap <silent> cp :let @+ = expand("%")<CR>
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
+" TeX
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
-
 " Suppose you want to remap the <C-j> key which Latex-Suite (actually
 " imaps.vim) uses to jump to the next placeholder. 
-imap <C-space> <Plug>IMAP_JumpForward
-
+"imap <C-space> <Plug>IMAP_JumpForward
 let g:Tex_DefaultTargetFormat = 'pdf'
 au BufWritePost *.tex silent call Tex_RunLaTeX()
 
+" Ruby
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 let g:rubycomplete_load_gemfile = 1
 let g:rubycomplete_use_bundler = 1
 
-let g:local_vimrc = '.vimrc'
-let g:loaded_user_vimrc = 1
-
-" MAN 
+" MAN & :help
 runtime! ftplugin/man.vim
+set keywordprg=:help
 
+" JS
+"au FileType javascript call JavaScriptFold()
+"au FileType javascript set foldmethod=syntax
+" TODO Revert back to auto mode after patching Vim to 1-7. But for now using old
+" engine, so that pangloss/vim-javascript and jelera/vim-javascript work.
+"au FileType javascript set regexpengine=1 | syntax enable
+
+" Indent Guides
+"let g:indent_guides_guide_size = 1
+
+" Disable matchparen plugin, so that it doesn't throw errors
 let loaded_matchparen = 1
+
+" delimitMate
+let delimitMate_expand_cr = 1
+
+" syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_jump = 3
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" TComment options
+let g:tcommentOptions = {'whitespace': 'no'}
+
+" Git (fugitive)
+"set statusline+=%{fugitive#statusline()}
+
+" easymotion
+map <Leader> <Plug>(easymotion-prefix)
+nmap / <Plug>(easymotion-sn)\v
+xmap / y/"
+omap / <Plug>(easymotion-tn)\v
+nmap ? /
+xmap ? /
+omap ? <Plug>(easymotion-Tn)\v
+nmap * /<>
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+nmap n <Plug>(easymotion-next)
+nmap N <Plug>(easymotion-prev)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_startofline = 0 " keep cursor colum JK motion
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_smartcase = 1
+au BufNewFile,BufRead * EMCommandLineNoreMap <c-j> <cr>
+
+" YouCompleteMe
+let g:ycm_key_list_select_completion = ['<Down>']
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<c-i>"
+let g:UltiSnipsJumpForwardTrigger="<c-i>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" FuzzyFinder
+map <Leader>ff :FufFile<CR>
+map <Leader>fb :FufBuffer<CR>
+let g:fuf_keyOpen = '<c-j>'
+let g:fuf_keyOpenSplit = '<c-w><c-j>'
+let g:fuf_keyOpenTabpage = '<c-w><c-t>'
+
+" airline
+set laststatus=2
+"let g:airline#extensions#tabline#enabled = 1
+
+" Extensions
+if filereadable(expand("~/.vim_extensions"))
+  source ~/.vim_extensions
+endif
+
+" !!! WARNING !!!
+" MAKE SURE THERE IS NO CONFIGURATION BEYOND THIS POINT
+
+" Uncomment the following to have Vim load indentation rules and plugins
+" according to the detected filetype.
+if has("autocmd")
+  filetype plugin indent on
+endif

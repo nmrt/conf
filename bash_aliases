@@ -8,6 +8,7 @@ export GCC_VER=$(gcc -dumpversion)
 #export GEM_HOME=/var/lib/gems/1.8
 export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
 export CHROME_BIN=chromium-browser
+export PROMPT_DIRTRIM=2
 
 # Verification will fail with self-signed certs, I guess...
 export GIT_SSL_NO_VERIFY=1
@@ -23,9 +24,10 @@ alias chgrp='chgrp -h --preserve-root'
 alias diff='diff -u'
 alias vless=/usr/share/vim/vim74/macros/less.sh
 
-function gvim {
-  /usr/bin/gvim -f $* > /dev/null 2> /dev/null & disown
-}
+# TODO Get rid of messages w/o disown
+#function gvim {
+#  /usr/bin/gvim -f $* > /dev/null 2> /dev/null & disown
+#}
 
 function dict() {
   /usr/bin/dict -d gcide $* | colorit

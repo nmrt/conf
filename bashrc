@@ -108,6 +108,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_extensions ]; then
+    . ~/.bash_extensions
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -119,6 +123,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Ruby enVironment (Version) Manager
 if [ -f ~/.rvm/scripts/rvm ]; then
   . ~/.rvm/scripts/rvm
 fi
@@ -126,5 +131,6 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+# Node Version Manager
 export NVM_DIR="/home/rt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
