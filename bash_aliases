@@ -24,9 +24,10 @@ alias chgrp='chgrp -h --preserve-root'
 alias diff='diff -u'
 alias vless=/usr/share/vim/vim74/macros/less.sh
 
-function gvim {
-  /usr/bin/gvim -f $* > /dev/null 2> /dev/null & disown
-}
+# TODO Get rid of messages w/o disown
+#function gvim {
+#  /usr/bin/gvim -f $* > /dev/null 2> /dev/null & disown
+#}
 
 function dict() {
   /usr/bin/dict -d gcide $* | colorit
