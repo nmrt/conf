@@ -279,3 +279,5 @@ let g:loaded_user_vimrc = 1
 
 " MAN 
 runtime! ftplugin/man.vim
+
+let loaded_matchparen = 1
