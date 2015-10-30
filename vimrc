@@ -363,18 +363,18 @@ let g:tcommentOptions = {'whitespace': 'no'}
 
 " easymotion
 map <Leader> <Plug>(easymotion-prefix)
-nmap / <Plug>(easymotion-sn)\v
+nmap <Leader>/ <Plug>(easymotion-sn)
 xmap / y/"
-omap / <Plug>(easymotion-tn)\v
-nmap ? /
-xmap ? /
-omap ? <Plug>(easymotion-Tn)\v
-nmap * /<>
+"omap / <Plug>(easymotion-tn)\v
+"nmap ? /
+"xmap ? /
+"omap ? <Plug>(easymotion-Tn)\v
+"nmap * /\V\<\>\
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
-nmap n <Plug>(easymotion-next)
-nmap N <Plug>(easymotion-prev)
+"nmap n <Plug>(easymotion-next)
+"nmap N <Plug>(easymotion-prev)
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
