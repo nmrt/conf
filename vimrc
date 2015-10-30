@@ -266,7 +266,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeShowBookmarks = 1
 let NERDTreeMapHelp = '<F1>'
 let NERDTreeWinSize = 50
-let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
+"let NERDTreeBookmarksFile = ".NERDTreeBookmarks"
 
 " Tagbar
 nmap <silent> <F9> :TagbarToggle<CR>
