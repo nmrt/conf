@@ -115,3 +115,7 @@ plugins
 ViewModel
 inOverlayMode
 Refactored
+viewport
+#eflacked
+Deflaked
+performant
