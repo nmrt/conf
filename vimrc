@@ -154,6 +154,7 @@ autocmd InsertEnter * 3match Error /\%>80v/
 autocmd InsertLeave * 3match none
 "autocmd InsertEnter * set spell
 "autocmd InsertLeave * set nospell
+autocmd FileType gitcommit set spell
 autocmd BufNewFile,BufRead *.phps set ft=php
 autocmd BufNewFile,BufRead *.vimperatorrc* set ft=vimperator
 
