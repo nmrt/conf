@@ -9,6 +9,7 @@ export GCC_VER=$(gcc -dumpversion)
 export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
 export CHROME_BIN=chromium-browser
 export PROMPT_DIRTRIM=2
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 # Verification will fail with self-signed certs, I guess...
 export GIT_SSL_NO_VERIFY=1
