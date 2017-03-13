@@ -20,6 +20,7 @@ Plugin 'scrooloose/syntastic'
 "Plugin 'walm/jshint.vim'
 "Plugin 'maksimr/vim-jsbeautify'
 "Plugin 'einars/js-beautify'
+Plugin 'leafgarland/typescript-vim'
 
 " Navigation
 Plugin 'scrooloose/nerdtree'
